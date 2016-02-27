@@ -6,6 +6,10 @@ header {
   border-width: 1px;
 }
 
+body {
+  margin: 0px;
+}
+
 footer {
   height: 50px;
   color: inherit;
@@ -17,22 +21,21 @@ footer {
 
 main {
   max-width: 1000px;
-  margin: 0 auto;
-  }
+  margin-left: 200px;
+  margin-right: 200px;
+}
 
 #nav {
   float: left;
   background: rgb(200, 200, 200);
   width: 150px;
   height: 300px;
-  position: fixed;
 }
 
 #pers {
   float: right;
   width: 150px;
   height: 300px;
-  position: fixed;
 }
 
 #logo {
