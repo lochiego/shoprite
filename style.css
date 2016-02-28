@@ -4,10 +4,12 @@ header {
   background: linear-gradient(rgb(167, 218, 255),rgb(22, 139, 214));
   border-style: solid;
   border-width: 1px;
+  padding: 10px;
 }
 
 body {
   margin: 0px;
+  max-height: 768px;
 }
 
 footer {
@@ -20,14 +22,15 @@ footer {
 }
 
 main {
-  max-width: 1000px;
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 150px;
+  margin-right: 150px;
+  padding: 10px;
+  border-left: 1px solid rgb(150,150,150);
+  border-right: 1px solid rgb(150,150,150);
 }
 
 #nav {
   float: left;
-  background: rgb(200, 200, 200);
   width: 150px;
   height: 300px;
 }
@@ -50,6 +53,13 @@ main {
   height: 200px;
   padding: 10px;
   border-radius: 25px;
+  margin: 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+a .route-box {
+  color: black;
 }
 
 .route-title {
@@ -57,22 +67,19 @@ main {
 }
 
 #learn-box {
-  color: inherit;
   background:rgb(252, 246, 157);
   background: linear-gradient(to bottom right, rgb(255, 255, 231), rgb(255, 214, 68));
   border-color: rgb(208, 177, 64);
 }
 
 #guided-box {
-  color: inherit;
   background:rgb(226, 162, 78);
   background: linear-gradient(to bottom right, rgb(255, 230, 198),rgb(226, 119, 51));
   border-color: rgb(199, 136, 52);
 }
 
 #freestyle-box {
-  color: inherit;
   background:rgb(223, 120, 120);
   background: linear-gradient(to bottom right, rgb(236, 205, 205),rgb(207, 53, 43));
-  border-color: rgb(182, 26, 26)
+  border-color: rgb(198, 50, 50)
 }
