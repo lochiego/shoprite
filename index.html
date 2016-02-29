@@ -7,62 +7,77 @@
 </head>
 <body>
   <header>
-    <!-- Menu bar goes here  -->
-    <nav>
-      <h1 id="logo">Logo</h1>
-      <a href="/learning/">Learning</a>
-      <a href="/shop/">Shop</a>
-      <a href="/compare/">Compare</a>
-    </nav>
+    <ul id="nav-bar">
+      <li><a href="index.html"><img id="logo" src="res/logo.png" alt="ShopRite"></a></li>
+      <li><a href="learn.html">Learning</a></li>
+      <li><a href="guided.html">Shop</a></li>
+      <li><a href="compare.html">Compare</a></li>
+    </ul>
   </header>
-  <aside id="nav">
-    <h2>Navigation</h2>
-  </aside>
-  <aside id="pers">
-    <h2>Personal</h2>
-  </aside>
-  <main>
-    <section>
-      <h1>Welcome!</h1>
-      <p>ShopRite is a laptop shopping environment aimed at delivering
-        a more informative and intuitive shopping experience. We'll
-        help you brush up on comparing technology and give you the
-        tools you need to find the right match.
-      </p>
-    </section>
-    <section>
-      <a  href="learn.html">
-        <div id="learn-box" class="route-box">
-          <h2 class="route-title" style="color:rgb(235, 191, 52)">Learn</h2>
-          <p>If you're new to buying laptops and aren't sure where to
-            start, we'll walk you through what you need to know to make
-            an educated decision. You'll get a brief overview of the bits
-            that come together to make your laptop and wat to look for
-            based on your lifestyle.
-          </p>
-        </div>
-      </a>
-      <a href="guided.html">
-        <div id="guided-box" class="route-box">
-          <h2 class="route-title" style="color:rgb(237, 128, 50)">Guided Shopping</h2>
-          <p>To get you started in the right direction visit this section.
-            We'll use your expected usage to draft some preliminary
-            requirements to suit your needs before overwhelming you with
-            options.
+  <div id="content">
+    <aside id="nav">
+      <section class="side-box">
+        <h2>Sidebar</h2>
+        <p>This section is adaptive based on where you are; In the Learning portal
+          it will provide navigation controls, whereas in the Shopping portal it
+          provides access to a series of powerful filters. In the Comparison portal
+          you can use the sidebar to reorder the features to check head-to-head.
         </p>
-        </div>
-      </a>
-      <a href="freestyle.html">
-        <div id="freestyle-box" class="route-box">
-          <h2 class="route-title" style="color:rgb(238, 54, 54)">Freestyle Shopping</h2>
-          <p>If you know exactly what you're after come here to jump right
-            into the action. This takes you directly to the filtering
-            stage.
-          </p>
-        </div>
-      </a>
-    </section>
-  </main>
+      </section>
+    </aside>
+    <main>
+      <section>
+        <h1>Welcome!</h1>
+        <p>ShopRite is a laptop shopping environment aimed at delivering
+          a more informative and intuitive shopping experience. We'll
+          help you brush up on comparing technology and give you the
+          tools you need to find the right match.
+        </p>
+      </section>
+      <section>
+        <a  href="learn.html">
+          <div id="learn-box" class="route-box">
+            <h2 class="route-title" style="color:rgb(235, 191, 52)">Learn</h2>
+            <p>If you're new to buying laptops and aren't sure where to
+              start, we'll walk you through what you need to know to make
+              an educated decision. You'll get a brief overview of the bits
+              that come together to make your laptop and wat to look for
+              based on your lifestyle.
+            </p>
+          </div>
+        </a>
+        <a href="guided.html">
+          <div id="guided-box" class="route-box">
+            <h2 class="route-title" style="color:rgb(237, 128, 50)">Guided Shopping</h2>
+            <p>To get you started in the right direction visit this section.
+              We'll use your expected usage to draft some preliminary
+              requirements to suit your needs before overwhelming you with
+              options.
+            </p>
+          </div>
+        </a>
+        <a href="freestyle.html">
+          <div id="freestyle-box" class="route-box">
+            <h2 class="route-title" style="color:rgb(238, 54, 54)">Freestyle Shopping</h2>
+            <p>If you know exactly what you're after come here to jump right
+              into the action. This takes you directly to the filtering
+              stage.
+            </p>
+          </div>
+        </a>
+      </section>
+    </main>
+    <aside id="pers">
+      <section class="side-box">
+        <h2>Personal</h2>
+        <p>Think of this section as your personal scratch paper.
+          Type your own notes or drop text directly from the page to save
+          clippings for later anywhere. You can also drag laptop models here to
+          set them aside for comparison later.
+        </p>
+      </section>
+    </aside>
+  </div>
   <footer>
     Copyright Eric Gonzalez 2016
   </footer>
