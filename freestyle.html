@@ -1,0 +1,59 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link href="./style.css" type="text/css" rel="stylesheet">
+  <link href="./shopping.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <title>ShopRite - Learn</title>
+
+  <!-- non BigSemantics include statements -->
+  <script src="../BigSemanticsJavaScript/libraries/jquery-2.0.0.min.js"></script>
+
+
+  <!-- bsjsCore Files. You must include them in this order so as to use any BigSemantics porject -->
+  <!-- Readyable is a class used to handle the asynchronous load time of the BS project
+  BSAutoSwitch is an interface to BigSemantics that can switch between using the lab's hosted service for metadata
+  and using a browser-installed extension. BSService and BSSExtension are implementations -->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/Readyable.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSAutoSwitch.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSService.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSExtension.js"></script>
+  <!-- BSUtils, Downloader, ParsedURL, and simplBase are helper classes. Include them, but don't really worry about them-->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSUtils.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/ParsedURL.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/Downloader.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/simpl/simplBase.js"></script>
+  <!--
+  RepoMan loads a Meta-metadata repository. Avoid doing anything with it directly; it's messy-->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/RepoMan.js"></script>
+
+  <!--Webpage-specific javascript and CSS includes-->
+  <script type="text/javascript" src="./engine.js"></script>
+</head>
+
+
+<!-- Upon the page being loaded, the onLoad function in demo.js will be called-->
+<body onload="onLoadSemantics('http://www.newegg.com/Laptops-Notebooks/SubCategory/ID-32?Pagesize=90')">
+
+  <h1>Howdy, howdy aggies you called I can't hear a thing</h1>
+  <div class="callbackMessageHolder" id="youtubeOutput">
+    <img class="loadingGifOfDoom" src="./res/loading.gif" alt="Loading">
+  </div>
+
+  <div id="browse-content">
+    <ul id="item-list">
+    </ul>
+  </div>
+  <div id="error-output">
+  </div>
+
+</body>
+
+</html>
