@@ -111,19 +111,19 @@ function createItem(item, parent) {
 			addFeatureText("$" + item.price, featuresNode);
 
 			// Memory
-			var mem = findFeature("memory", itemDetails.specifications_table);
+			var mem = findFeature("Memory", itemDetails.specifications_table);
 			if (mem != null) {
 				addFeatureText(mem, featuresNode);
 			}
 
 			// Storage
-			var storage = findFeature("storage", itemDetails.specifications_table);
+			var storage = findFeature("Storage", itemDetails.specifications_table);
 			if (storage != null) {
 				addFeatureText(storage, featuresNode);
 			}
 
 			// Display size
-			var display = findFeature("screen_size", itemDetails.specifications_table);
+			var display = findFeature("Screen", itemDetails.specifications_table);
 			if (display != null) {
 				addFeatureText(display, featuresNode);
 			}
@@ -139,35 +139,34 @@ function createItem(item, parent) {
 	});
 }
 
-var specTitles = {
-	"brand":"Brand",
-	"series":"Series",
-	"os":"Operating System",
-	"cpu":"CPU",
-	"screen_size":"Screen",
-	"memory":"Memory",
-	"storage":"Storage",
-	"gpu":"Graphics Card",
-	"gpu_memory":"Video Memory",
-	"weight":"Weight",
-	"screen_resolution":"Resolution",
-	"touch":"Touchscreen",
-	"battery":"Battery Life",
-	"style":"Style"
-}
+var specTitles = [
+	"Brand",
+	"Series",
+	"Operating System",
+	"CPU",
+	"Screen",
+	"Memory",
+	"Storage",
+	"Graphics Card",
+	"Video Memory",
+	"Weight",
+	"Resolution",
+	"Touchscreen",
+	"Battery Life",
+	"Style"
+]
 
 function findFeature(feature, spec_table) {
 	try {
-	var featureName = specTitles[feature];
-	for (table of spec_table) {
-		for (spec of table.specifications) {
-			if (spec.name == featureName)
-			 return spec.value;
+		for (table of spec_table) {
+			for (spec of table.specifications) {
+				if (spec.name == feature)
+				return spec.value;
+			}
 		}
+	} catch(e) {
+		console.log(e.stack);
 	}
-} catch(e) {
-	console.log(e.stack);
-}
 	return null;
 }
 
