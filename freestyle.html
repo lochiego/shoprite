@@ -41,19 +41,53 @@
 
 <!-- Upon the page being loaded, the onLoad function in demo.js will be called-->
 <body onload="onLoadSemantics('http://www.newegg.com/Laptops-Notebooks/SubCategory/ID-32?Pagesize=90')">
-
-  <h1>Howdy, howdy aggies you called I can't hear a thing</h1>
-  <div class="callbackMessageHolder" id="youtubeOutput">
-    <img class="loadingGifOfDoom" src="./res/loading.gif" alt="Loading">
+  <nav class="navbar navbar-default" style="margin-bottom=0">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html"><img id="logo" src="res/logo.png" alt="ShopRite"></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="learn.html">Learning</a></li>
+        <li class="active"><a href="freestyle.html">Shop</a></li>
+        <li><a href="compare.html">Compare</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id="content">
+    <aside id="nav">
+      <section class="side-box">
+        <h2>Filters</h2>
+        <div id="filters">
+          <script>
+            constructFilters();
+          </script>
+        </div>
+      </section>
+    </aside>
+    <main>
+      <div class="callbackMessageHolder" id="youtubeOutput">
+        <img class="loadingGifOfDoom" src="./res/loading.gif" alt="Loading">
+      </div>
+      <div id="browse-content">
+        <ul id="item-list">
+        </ul>
+      </div>
+      <div id="error-output">
+      </div>
+    </main>
+    <aside id="pers">
+      <section class="side-box">
+        <h2>Personal</h2>
+        <p>Think of this section as your personal scratch paper.
+          Type your own notes or drop text directly from the page to save
+          clippings for later anywhere. You can also drag laptop models here to
+          set them aside for comparison later.
+        </p>
+      </section>
+    </aside>
   </div>
-
-  <div id="browse-content">
-    <ul id="item-list">
-    </ul>
-  </div>
-  <div id="error-output">
-  </div>
-
+  <nav class="navbar navbar-default">
+    Copyright Eric Gonzalez 2016
+  </nav>
 </body>
-
 </html>

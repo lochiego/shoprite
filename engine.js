@@ -176,3 +176,93 @@ function addFeatureText(text, parent) {
 	listNode.appendChild(textNode);
 	parent.appendChild(listNode);
 }
+
+
+function constructFilters() {
+	var element = document.getElementById("filters");
+
+	var htmlChunks =[];
+	htmlChunks.push(constructBrandFilter());
+	htmlChunks.push(constructOSFilter());
+	htmlChunks.push(constructCPUFilter());
+	htmlChunks.push(constructScreenFilter());
+	htmlChunks.push(constructMemoryFilter());
+	htmlChunks.push(constructStorageFilter());
+	htmlChunks.push(constructGPUFilter());
+	htmlChunks.push(constructWeightFilter());
+	htmlChunks.push(constructResolutionFilter());
+	htmlChunks.push(constructTouchFilter());
+	htmlChunks.push(constructBatteryFilter());
+	htmlChunks.push(constructStyleFilter());
+
+	element.innerHTML = htmlChunks.join("");
+}
+
+function constructFilter(name,options) {
+	try {
+		var string = ["<div class='panel-group'><div class='panel panel-default'>",
+		"<a data-toggle='collapse' href='#"+name+"'>",
+		"<div class='panel-heading'><h4 class='panel-title'>"+name,
+		"</h4></div><div id='"+name+"' class='panel-collapse collapse'>",
+		"</a>",
+		"<ul class='list-group'>"];
+
+		for (option of options) {
+			string.push("<li class='list-group-item'>" + option + "</li>");
+		}
+		string.push("</ul></div></div></div>");
+		return string.join("");
+	}
+	catch(e) {
+		console.log(e.stack);
+	}
+	return "";
+}
+
+function constructBrandFilter() {
+	return constructFilter("Brand",["Acer", "Apple", "ASUS", "Dell", "Gateway", "Hewlett-Packard", "Lenovo", "Sony", "Toshiba"]);
+}
+
+function constructOSFilter() {
+
+}
+
+function constructCPUFilter() {
+
+}
+
+function constructScreenFilter() {
+
+}
+
+function  constructMemoryFilter() {
+
+}
+
+function constructStorageFilter() {
+
+}
+
+function constructGPUFilter() {
+
+}
+
+function constructWeightFilter() {
+
+}
+
+function constructResolutionFilter() {
+
+}
+
+function constructTouchFilter() {
+
+}
+
+function constructBatteryFilter() {
+
+}
+
+function constructStyleFilter() {
+
+}
