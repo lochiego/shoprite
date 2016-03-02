@@ -182,6 +182,7 @@ function constructFilters() {
 	var element = document.getElementById("filters");
 
 	var htmlChunks =[];
+	htmlChunks.push(constructPriceFilter());
 	htmlChunks.push(constructBrandFilter());
 	htmlChunks.push(constructOSFilter());
 	htmlChunks.push(constructCPUFilter());
@@ -194,6 +195,8 @@ function constructFilters() {
 	htmlChunks.push(constructTouchFilter());
 	htmlChunks.push(constructBatteryFilter());
 	htmlChunks.push(constructStyleFilter());
+
+	htmlChunks.push("<button id='apply' type='button' class='btn btn-primary'>Apply</button>");
 
 	element.innerHTML = htmlChunks.join("");
 }
@@ -219,48 +222,52 @@ function constructFilter(name,options) {
 	return "";
 }
 
+function constructPriceFilter() {
+	return constructFilter("Price", ["$100 - $200", "$200 - $400", "$400 - $600", "$600 - $800"]);
+}
+
 function constructBrandFilter() {
-	return constructFilter("Brand",["Acer", "Apple", "ASUS", "Dell", "Gateway", "Hewlett-Packard", "Lenovo", "Sony", "Toshiba"]);
+	return constructFilter("Brand",["Acer", "Apple", "ASUS", "Dell", "Gateway", "HP", "Lenovo", "MSI", "Samsung", "Sony", "ThinkPad", "Toshiba"]);
 }
 
 function constructOSFilter() {
-
+	return constructFilter("OS", ["Windows", "Mac OS", "Chrome", "Linux"]);
 }
 
 function constructCPUFilter() {
-
+	return constructFilter("CPU", ["Intel", "AMD"]);
 }
 
 function constructScreenFilter() {
-
+	return constructFilter("Size", ["11\"", "12\"", "13\"", "14\"", "15\"", "16\"", "17\""]);
 }
 
 function  constructMemoryFilter() {
-
+	return constructFilter("Memory", ["2 GB", "4 GB", "6 GB", "8 GB", "12 GB", "16 GB", "24 GB", "32 GB", "64 GB"]);
 }
 
 function constructStorageFilter() {
-
+	return constructFilter("Storage", ["120 GB", "240 GB", "500 GB", "1 TB", "2 TB"]);
 }
 
 function constructGPUFilter() {
-
+	return constructFilter("GPU", ["NVIDIA GeForce", "AMD Radeon", "Intel Graphics", "AMD FirePro", "ATI Mobility"]);
 }
 
 function constructWeightFilter() {
-
+	return constructFilter("Weight", ["< 2 lbs", "2 - 2.9 lbs", "3 - 3.9 lbs", "4 - 4.9 lbs", "5 - 5.9 lbs", "6 - 6.9 lbs", "> 7 lbs"]);
 }
 
 function constructResolutionFilter() {
-
+	return constructFilter("Resolution", ["1024 x 768", "1280 x 800", "1366 x 768", "1440 x 900", "1600 x 900", "1920 x 1080", "2560 x 1440", "2880 x 1620"]);
 }
 
 function constructTouchFilter() {
-
+	return constructFilter("Touchscreen", ["No","Yes"]);
 }
 
 function constructBatteryFilter() {
-
+ return constructFilter("Battery", ["2-3 hrs", "3-4 hrs", "4-5 hrs","5-6 hrs", "6-7 hrs", "7-8 hrs"]);
 }
 
 function constructStyleFilter() {
