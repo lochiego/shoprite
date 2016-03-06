@@ -1,3 +1,7 @@
+#content {
+  margin-top: 50px;
+}
+
 #item-list {
 }
 
@@ -5,7 +9,7 @@
   display: inline-block;
   vertical-align: top;
   width: 200px;
-  height: 250px;
+  height: 230px;
 }
 
 .item-node h3 {

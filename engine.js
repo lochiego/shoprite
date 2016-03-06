@@ -46,11 +46,9 @@ function foundData(err, metadataAndMetametaData){
 		// browseCont.appendChild(youtubeThumbnail); // Instead append each of the images
 		var listNode = document.getElementById("item-list");
 		for (item of unwrappedMetadata.items) {
-			item.price = randomIntFromInterval(20,80) * 10 - 0.01;
 			createItem(item, listNode);
 		}
 
-		working_items = unwrappedMetadata.items;
 		var browseCont = document.getElementById('browse-content');
 		browseCont.appendChild(listNode);
 	}catch(e){
@@ -61,7 +59,7 @@ function foundData(err, metadataAndMetametaData){
 	}
 }
 
-var working_items;
+var working_items = [];
 var filters = [];
 
 // 'viciously' copy-pasted from stackoverflow answer
@@ -83,60 +81,83 @@ function createItem(item, parent) {
 		var itemDetails = unwrappedMetadata;
 
 		try {
-		var specTable = itemDetails.specifications_table[0];
-		var detailsTable = specTable.specifications;
+			var product = new laptop(itemDetails);
+			working_items.push(product);
 
-		var nameNode = document.createElement("h3");
-		var title = detailsTable[0].value + " " + detailsTable[1].value;
-		var itemName = document.createTextNode(title);
-		nameNode.appendChild(itemName);
+			var nameNode = document.createElement("h3");
+			var title = product.laptopTitle();
+			var itemName = document.createTextNode(title);
+			nameNode.appendChild(itemName);
 
-		var imageUrl = itemDetails.main_images[0].location;
-		var imageNode = document.createElement("img");
-		imageNode.src = imageUrl;
-		imageNode.alt = title;
+			var imageUrl = product.imageUrl;
+			var imageNode = document.createElement("img");
+			imageNode.src = imageUrl;
+			imageNode.alt = title;
 
-		itemNode.appendChild(imageNode);
-		itemNode.appendChild(nameNode);
+			itemNode.appendChild(imageNode);
+			itemNode.appendChild(nameNode);
 
-		// Add top features from filter or basic ones if not available
-		var featuresNode = document.createElement("ul");
+			// Add top features from filter or basic ones if not available
+			var featuresNode = document.createElement("ul");
 
-		if (filters.count > 0) {
+			if (filters.count > 0) {
+				// Price should always be shown
+				addFeatureText("$" + product.price, featuresNode);
+			} else {	// Use stock comparisons in lieu of user-specified ones
+				// price
+				addFeatureText("$" + product.price, featuresNode);
 
-			// Price should always be shown
-			addFeatureText("$" + item.price, featuresNode);
-		} else {	// Use stock comparisons in lieu of user-specified ones
-			// price
-			addFeatureText("$" + item.price, featuresNode);
+				// Memory
+				var mem = product.memory;
+				if (mem != null) {
+					addFeatureText(mem, featuresNode);
+				}
 
-			// Memory
-			var mem = findFeature("Memory", itemDetails.specifications_table);
-			if (mem != null) {
-				addFeatureText(mem, featuresNode);
+				// Storage
+				var storage = product.storage;
+				if (storage != null) {
+					addFeatureText(storage, featuresNode);
+				}
+
+				// Display size
+				var display = product.screen;
+				if (display != null) {
+					addFeatureText(display, featuresNode);
+				}
 			}
 
-			// Storage
-			var storage = findFeature("Storage", itemDetails.specifications_table);
-			if (storage != null) {
-				addFeatureText(storage, featuresNode);
-			}
+			itemNode.appendChild(featuresNode);
 
-			// Display size
-			var display = findFeature("Screen", itemDetails.specifications_table);
-			if (display != null) {
-				addFeatureText(display, featuresNode);
-			}
+			parent.appendChild(itemNode);
 		}
-
-		itemNode.appendChild(featuresNode);
-
-		parent.appendChild(itemNode);
-	}
-	catch(e){
-
-	}
+		catch(e){
+			console.log(e.stack);
+		}
 	});
+}
+
+function laptop(item) {
+	var specTable = item.specifications_table;
+	var modelTable = specTable[0];
+	this.laptopTitle = function() {
+		return this.brand + " " + this.series;
+	}
+	this.price = randomIntFromInterval(20,80) * 10 - 0.01;
+ 	this.imageUrl = item.main_images[0].location;
+	this.brand = findFeature("Brand", specTable);
+	this.series = findFeature("Series", specTable);
+	this.os = findFeature("Operating System", specTable);
+	this.cpu = findFeature("CPU Type", specTable);
+	this.screen = findFeature("Screen", specTable);
+	this.memory = findFeature("Memory", specTable);
+	this.storage = findFeature("Storage", specTable);
+	this.gpu = findFeature("Graphics Card", specTable);
+	this.gpuMem = findFeature("Video Memory", specTable);
+	this.weight = findFeature("Weight", specTable);
+	this.resolution = findFeature("Resolution", specTable);
+	this.touchscreen = findFeature("Touchscreen", specTable);
+	this.battery = findFeature("Battery Life", specTable);
+	this.hwStyle = findFeature("Style", specTable);
 }
 
 var specTitles = [

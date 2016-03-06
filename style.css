@@ -10,7 +10,7 @@ header {
 #logo {
   width: 120px;
   height: 40px;
-  border: 0
+  border: 0;
 }
 
 #nav-bar {
@@ -63,24 +63,37 @@ footer {
 
 aside {
   background: rgb(230, 230, 230);
+  position: fixed;
+  top: 50px;
+  overflow: auto;
   width: 200px;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
+  bottom: 0;
 }
 
 .side-box {
   background: white;
   padding: 10px;
-  -webkit-flex: 1;
-  flex: 1;
+  /*-webkit-flex: 1;*/
+  /*flex: 1;*/
+  padding-bottom: 50px;
+}
+
+#nav {
+  margin-left: -200px;
+  left: 200px;
+  border-right: 1px solid rgb(150,150,150);
 }
 
 #nav h2 {
   color: rgb(0, 158, 59);
   text-align: center;
   border-bottom: 1px solid rgb(150,150,150);
+}
+
+#pers {
+  margin-right: -200px;
+  right: 200px;
+  border-left: 1px solid rgb(150,150,150);
 }
 
 #pers h2 {
@@ -91,12 +104,11 @@ aside {
 
 main {
   padding: 10px;
-  border-left: 1px solid rgb(150,150,150);
-  border-right: 1px solid rgb(150,150,150);
   -webkit-flex: 1;
   flex: 1;
   display: -webkit-flex;
   display: flex;
+  margin: 50px 200px 0 200px;
 }
 
 
@@ -109,7 +121,7 @@ main {
   border-style: solid;
   border-width: 1px;
   width: 300px;
-  height: 200px;
+  height: 230px;
   padding: 10px;
   border-radius: 25px;
   margin: 1em;
@@ -151,9 +163,4 @@ article img {
 .loadingGifOfDoom{
 	width: 30px;
 	height: 30px;
-}
-
-#apply {
-  margin-left: 30px;
-  margin-right: 30px;
 }
