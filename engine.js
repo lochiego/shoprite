@@ -70,8 +70,15 @@ function randomIntFromInterval(min,max)
 
 function createItem(item, parent) {
 	var location = item.location;
-	var itemNode = document.createElement("li")
+	var itemNode = document.createElement("li");
 	itemNode.className = "item-node";
+	var anchorNode = document.createElement("a");
+	var att = document.createAttribute("data-toggle");
+	att.value = "modal";
+	anchorNode.setAttributeNode(att);
+	att = document.createAttribute("href");
+	att.value = "#laptopModal";
+	anchorNode.setAttributeNode(att);
 
 	var options = {};
 
@@ -84,6 +91,10 @@ function createItem(item, parent) {
 			var product = new laptop(itemDetails);
 			working_items.push(product);
 
+			var att = document.createAttribute("data-product-index");
+			att.value = working_items.length-1;
+			anchorNode.setAttributeNode(att);
+
 			var nameNode = document.createElement("h3");
 			var title = product.laptopTitle();
 			var itemName = document.createTextNode(title);
@@ -94,8 +105,8 @@ function createItem(item, parent) {
 			imageNode.src = imageUrl;
 			imageNode.alt = title;
 
-			itemNode.appendChild(imageNode);
-			itemNode.appendChild(nameNode);
+			anchorNode.appendChild(imageNode);
+			anchorNode.appendChild(nameNode);
 
 			// Add top features from filter or basic ones if not available
 			var featuresNode = document.createElement("ul");
@@ -126,8 +137,8 @@ function createItem(item, parent) {
 				}
 			}
 
-			itemNode.appendChild(featuresNode);
-
+			anchorNode.appendChild(featuresNode);
+			itemNode.appendChild(anchorNode);
 			parent.appendChild(itemNode);
 		}
 		catch(e){
