@@ -8,14 +8,13 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <link href="./style.css" type="text/css" rel="stylesheet">
   <link href="./shopping.css" type="text/css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <title>ShopRite - Learn</title>
 
   <!-- non BigSemantics include statements -->
-  <script src="../BigSemanticsJavaScript/libraries/jquery-2.0.0.min.js"></script>
-
 
   <!-- bsjsCore Files. You must include them in this order so as to use any BigSemantics porject -->
   <!-- Readyable is a class used to handle the asynchronous load time of the BS project
@@ -85,6 +84,113 @@
         </p>
       </section>
     </aside>
+  </div>
+
+  <!-- Modal -->
+  <div id="laptopModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <img align=>
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td>Price</td>
+                <td id=laptopPrice></td>
+              </tr>
+              <tr>
+                <td>Brand</td>
+                <td id=laptopBrand></td>
+              </tr>
+              <tr>
+                <td>Operating System</td>
+                <td id=laptopOS></td>
+              </tr>
+              <tr>
+                <td>CPU</td>
+                <td id=laptopCPU></td>
+              </tr>
+              <tr>
+                <td>Screen</td>
+                <td id=laptopScreen></td>
+              </tr>
+              <tr>
+                <td>Memory</td>
+                <td id=laptopMemory></td>
+              </tr>
+              <tr>
+                <td>Storage</td>
+                <td id=laptopStorage></td>
+              </tr>
+              <tr>
+                <td>Graphics Card</td>
+                <td id=laptopGPU></td>
+              </tr>
+              <tr>
+                <td>Video Memory</td>
+                <td id=laptopGPUMem></td>
+              </tr>
+              <tr>
+                <td>Weight</td>
+                <td id=laptopWeight></td>
+              </tr>
+              <tr>
+                <td>Resolution</td>
+                <td id=laptopResolution></td>
+              </tr>
+              <tr>
+                <td>Touchscreen</td>
+                <td id=laptopTouchscreen></td>
+              </tr>
+              <tr>
+                <td>Battery Life</td>
+                <td id=laptopBattery></td>
+              </tr>
+              <tr>
+                <td>Style</td>
+                <td id=laptopStyle></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        <script>
+        $('#laptopModal').on('show.bs.modal', function (event) { // id of the modal with event
+            var itemIndex = $(event.relatedTarget).data('product-index'); // Item that triggered the modal
+            var item = working_items[itemIndex];
+
+            var title = item.laptopTitle();
+
+            // Update the modal's spec content.
+            var modal = $(this)
+            modal.find('.modal-title').text(title);
+            modal.find('img').attr({'src':item.imageUrl,'alt':item.laptopTitle()});
+            $("#laptopPrice").text("$"+item.price);
+            $('#laptopBrand').text(item.brand);
+            $('#laptopOS').text(item.os);
+            $('#laptopCPU').text(item.cpu);
+            $('#laptopScreen').text(item.screen);
+            $('#laptopMemory').text(item.memory);
+            $('#laptopStorage').text(item.storage);
+            $('#laptopGPU').text(item.gpu);
+            $('#laptopGPUMem').text(item.gpuMem);
+            $('#laptopWeight').text(item.weight);
+            $('#laptopResolution').text(item.resolution);
+            $('#laptopTouchscreen').text(item.touchscreen);
+            $('#laptopBattery').text(item.battery);
+            $('#laptopStyle').text(item.hwStyle);
+          });
+        </script>
+      </div>
+    </div>
   </div>
 </body>
 </html>
