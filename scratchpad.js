@@ -8,14 +8,43 @@ function allowDrop(ev) {
 
 var sidebarItems = new Set();
 
+function loadSideItems() {
+  var string = sessionStorage.getItem('personals')
+  var parsedItems = $.parseJSON(string);
+  if (parsedItems.length > 0) {
+    var laptopTitle = function() {
+      return this.brand + " " + this.series;
+    }
+    for (item of parsedItems) {
+      item.laptopTitle = laptopTitle;
+      sidebarItems.add(item);
+      insertLaptop(item);
+    }
+  }
+}
+
+function addSideItem(laptop) {
+  sidebarItems.add(laptop);
+  sessionStorage.setItem('personals', JSON.stringify([...sidebarItems]));
+}
+
+function removeSideItem(laptop) {
+  sidebarItems.delete(item);
+  sessionStorage.setItem('personals', JSON.stringify([...sidebarItems]));
+}
+
 function dropItem(ev) {
   ev.preventDefault();
   var itemIndex = ev.dataTransfer.getData("item-index");
   var item = filtered_items[itemIndex];
   if (!sidebarItems.has(item)) {
-    sidebarItems.add(item);
-    document.getElementById('scratchpad').appendChild(sidebarVersion(item));
+    addSideItem(item);
+    insertLaptop(item);
   }
+}
+
+function insertLaptop(laptop) {
+  document.getElementById('scratchpad').appendChild(sidebarVersion(laptop));
 }
 
 function sidebarVersion(laptop) {
@@ -30,6 +59,6 @@ function sidebarVersion(laptop) {
 function removeItem(event) {
   var div = event.target.parentNode;
   var item = div.laptop;
-  sidebarItems.delete(item);
+  removeSideItem(item);
   document.getElementById('scratchpad').removeChild(div);
 }
