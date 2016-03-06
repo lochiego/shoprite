@@ -76,13 +76,15 @@
       </div>
     </main>
     <aside id="pers">
-      <section class="side-box" ondragover="allowDrop" ondrop="dropItem">
-        <h2>Personal</h2>
-        <p>Think of this section as your personal scratch paper.
-          Type your own notes or drop text directly from the page to save
-          clippings for later anywhere. You can also drag laptop models here to
-          set them aside for comparison later.
-        </p>
+      <section class="side-box" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <h2 ondragover="" ondrop="">Personal</h2>
+        <div id="scratchpad">
+          <p ondragover="" ondrop="">Think of this section as your personal scratch paper.
+            Type your own notes or drop text directly from the page to save
+            clippings for later anywhere. You can also drag laptop models here to
+            set them aside for comparison later.
+          </p>
+        </div>
       </section>
     </aside>
   </div>
