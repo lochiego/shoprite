@@ -16,6 +16,11 @@
   font-size: 1em;
 }
 
+.item-node a {
+  overflow: auto;
+  display: block;
+}
+
 #apply {
   width: 120px;
   margin-left: 30px;

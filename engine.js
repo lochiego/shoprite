@@ -60,6 +60,7 @@ function foundData(err, metadataAndMetametaData){
 }
 
 var working_items = [];
+var filtered_items = working_items;
 var filters = [];
 
 // 'viciously' copy-pasted from stackoverflow answer
@@ -70,15 +71,6 @@ function randomIntFromInterval(min,max)
 
 function createItem(item, parent) {
 	var location = item.location;
-	var itemNode = document.createElement("li");
-	itemNode.className = "item-node";
-	var anchorNode = document.createElement("a");
-	var att = document.createAttribute("data-toggle");
-	att.value = "modal";
-	anchorNode.setAttributeNode(att);
-	att = document.createAttribute("href");
-	att.value = "#laptopModal";
-	anchorNode.setAttributeNode(att);
 
 	var options = {};
 
@@ -90,6 +82,23 @@ function createItem(item, parent) {
 		try {
 			var product = new laptop(itemDetails);
 			working_items.push(product);
+
+			var itemNode = document.createElement("li");
+			itemNode.className = "item-node";
+
+			var anchorNode = document.createElement("a");
+			att = document.createAttribute("data-toggle");
+			att.value = "modal";
+			anchorNode.setAttributeNode(att);
+			att = document.createAttribute("href");
+			att.value = "#laptopModal";
+			anchorNode.setAttributeNode(att);
+			var att = document.createAttribute("draggable");
+			att.value = true;
+			anchorNode.setAttributeNode(att);
+			att = document.createAttribute("ondragstart");
+			att.value = "dragItem(event)";
+			anchorNode.setAttributeNode(att);
 
 			var att = document.createAttribute("data-product-index");
 			att.value = working_items.length-1;

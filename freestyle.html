@@ -35,7 +35,7 @@
 
   <!--Webpage-specific javascript and CSS includes-->
   <script type="text/javascript" src="./engine.js"></script>
-  <script type="text/javascript" src="./cors.js"></script>
+  <script type="text/javascript" src="./scratchpad.js"></script>
 </head>
 
 
@@ -76,7 +76,7 @@
       </div>
     </main>
     <aside id="pers">
-      <section class="side-box">
+      <section class="side-box" ondragover="allowDrop" ondrop="dropItem">
         <h2>Personal</h2>
         <p>Think of this section as your personal scratch paper.
           Type your own notes or drop text directly from the page to save
