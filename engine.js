@@ -169,6 +169,16 @@ function laptop(item) {
 	this.touchscreen = findFeature("Touchscreen", specTable);
 	this.battery = findFeature("Battery Life", specTable);
 	this.hwStyle = findFeature("Style", specTable);
+	var reviews = item.reviews;
+	var rating = 0;
+	for (review of reviews) {
+		rating += parseInt(review.rating);
+	}
+	if (rating > 0) {
+		rating = rating/reviews.length;
+	}
+	this.rating = Math.round( rating * 10 ) / 10;
+	this.reviewCount = reviews.length;
 }
 
 var specTitles = [

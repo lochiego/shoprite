@@ -26,3 +26,11 @@ table {
   width: 100%;
   height: 100%;
 }
+
+.center-contents {
+  text-align: center;
+}
+
+#laptopMagReview {
+  font-size: 2em;
+}

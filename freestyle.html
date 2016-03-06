@@ -35,6 +35,7 @@
 
   <!--Webpage-specific javascript and CSS includes-->
   <script type="text/javascript" src="./engine.js"></script>
+  <script type="text/javascript" src="./cors.js"></script>
 </head>
 
 
@@ -97,7 +98,10 @@
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <img align=>
+          <div class="center-contents">
+            <img align=>
+            <h5 id=neweggRating></h5>
+          </div>
           <table class="table table-striped">
             <tbody>
               <tr>
@@ -158,6 +162,9 @@
               </tr>
             </tbody>
           </table>
+          <div class="center-contents">
+            <a id=laptopMagReview>LaptopMag Review</a>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -173,6 +180,14 @@
             var modal = $(this)
             modal.find('.modal-title').text(title);
             modal.find('img').attr({'src':item.imageUrl,'alt':item.laptopTitle()});
+            var ratingString;
+            if (item.hasOwnProperty("rating")) {
+              ratingString = item.rating+" out of 5 (" + item.reviewCount+" reviews)";
+            }
+            else {
+              ratingString = "Not Rated";
+            }
+            $('#neweggRating').text("Rating: "+ratingString);
             $("#laptopPrice").text("$"+item.price);
             $('#laptopBrand').text(item.brand);
             $('#laptopOS').text(item.os);
@@ -187,6 +202,12 @@
             $('#laptopTouchscreen').text(item.touchscreen);
             $('#laptopBattery').text(item.battery);
             $('#laptopStyle').text(item.hwStyle);
+
+            if (item.series != null) {
+              var queryString = item.brand+'+'+item.series.replace(" ", "+");
+              var fullUrl="http://www.laptopmag.com/search?q="+queryString;
+              $('#laptopMagReview').attr('href',fullUrl);
+            }
           });
         </script>
       </div>
