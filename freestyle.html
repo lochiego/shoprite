@@ -213,7 +213,7 @@
             if (item.series != null) {
               var queryString = item.brand+'+'+item.series.replace(" ", "+");
               var fullUrl="http://www.laptopmag.com/search?q="+queryString;
-              $('#laptopMagReview').attr('href',fullUrl);
+              $('#laptopMagReview').attr({'href',fullUrl,'target':'_blank'});
             }
           });
         </script>
