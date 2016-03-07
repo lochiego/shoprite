@@ -35,12 +35,12 @@
 
   <!--Webpage-specific javascript and CSS includes-->
   <script type="text/javascript" src="./engine.js"></script>
-  <script type="text/javascript" src="./cors.js"></script>
+  <script type="text/javascript" src="./scratchpad.js"></script>
 </head>
 
 
 <!-- Upon the page being loaded, the onLoad function in demo.js will be called-->
-<body onload="onLoadSemantics('http://www.newegg.com/Laptops-Notebooks/SubCategory/ID-32?Pagesize=90')">
+<body onload="onLoad()">
   <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom=0">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -58,9 +58,7 @@
       <section class="side-box">
         <h2>Filters</h2>
         <div id="filters">
-          <script>
-            constructFilters();
-          </script>
+          <script>constructFilters();</script>
         </div>
       </section>
     </aside>
@@ -76,14 +74,17 @@
       </div>
     </main>
     <aside id="pers">
-      <section class="side-box">
-        <h2>Personal</h2>
-        <p>Think of this section as your personal scratch paper.
-          Type your own notes or drop text directly from the page to save
-          clippings for later anywhere. You can also drag laptop models here to
-          set them aside for comparison later.
-        </p>
+      <section class="side-box" ondragover="allowDrop(event)" ondrop="dropItem(event)">
+        <h2 ondragover="" ondrop="">Personal</h2>
+        <div id="scratchpad">
+          <p ondragover="" ondrop="">Think of this section as your personal scratch paper.
+            Type your own notes or drop text directly from the page to save
+            clippings for later anywhere. You can also drag laptop models here to
+            set them aside for comparison later.
+          </p>
+        </div>
       </section>
+      <script>loadSideItems();</script>
     </aside>
   </div>
 
@@ -172,8 +173,12 @@
         <script>
         $('#laptopModal').on('show.bs.modal', function (event) { // id of the modal with event
             var itemIndex = $(event.relatedTarget).data('product-index'); // Item that triggered the modal
-            var item = working_items[itemIndex];
-
+            var item;
+            if ($(event.relatedTarget).data('source') == null) {
+              item = working_items[itemIndex];
+            } else {
+              item = Array.from(sidebarItems)[itemIndex];
+            }
             var title = item.laptopTitle();
 
             // Update the modal's spec content.
