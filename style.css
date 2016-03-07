@@ -109,6 +109,7 @@ main {
   display: -webkit-flex;
   display: flex;
   margin: 50px 200px 0 200px;
+  overflow: auto;
 }
 
 
