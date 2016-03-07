@@ -215,8 +215,20 @@ function laptop(item) {
 		if (rating > 0) {
 			rating = rating/reviews.length;
 		}
+		else {
+			rating = "Not rated";
+			reviewCount = 0;
+		}
 		this.rating = Math.round( rating * 10 ) / 10;
 		this.reviewCount = reviews.length;
+	}
+	this.reviewLink = function() {
+		var queryString = this.brand
+		if (this.series != null) {
+			queryString += this.series.replace(" ", "+");
+		}
+		var fullUrl="http://www.laptopmag.com/search?q="+queryString;
+		return fullUrl;
 	}
 }
 

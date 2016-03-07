@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link href="./style.css" type="text/css" rel="stylesheet">
+  <link href="./shopping.css" type="text/css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <title>ShopRite - Compare</title>
+
+  <!-- non BigSemantics include statements -->
+
+  <!-- bsjsCore Files. You must include them in this order so as to use any BigSemantics porject -->
+  <!-- Readyable is a class used to handle the asynchronous load time of the BS project
+  BSAutoSwitch is an interface to BigSemantics that can switch between using the lab's hosted service for metadata
+  and using a browser-installed extension. BSService and BSSExtension are implementations -->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/Readyable.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSAutoSwitch.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSService.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSExtension.js"></script>
+  <!-- BSUtils, Downloader, ParsedURL, and simplBase are helper classes. Include them, but don't really worry about them-->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSUtils.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/ParsedURL.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/Downloader.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/simpl/simplBase.js"></script>
+  <!--
+  RepoMan loads a Meta-metadata repository. Avoid doing anything with it directly; it's messy-->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/RepoMan.js"></script>
+
+  <!--Webpage-specific javascript and CSS includes-->
+  <script type="text/javascript" src="./engine.js"></script>
+  <script type="text/javascript" src="./comparisons.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom=0">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html"><img id="logo" src="res/logo.png" alt="ShopRite"></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="learn.html">Learning</a></li>
+        <li><a href="freestyle.html">Shop</a></li>
+        <li class="active"><a href="compare.html">Compare</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id="content" ng-app="shopRite" ng-controller="comparisons">
+    <aside id="nav">
+      <section class="side-box">
+        <h2>Specifications</h2>
+        <p>Toggle the specifications for the table.
+        </p>
+        <!-- Put filter options -->
+      </section>
+    </aside>
+    <main>
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td></td>
+            <td ng-repeat='laptop in laptops'>
+                <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">
+            </td>
+          </tr>
+          <tr>
+            <td>Newegg Rating</td>
+            <td ng-repeat='laptop in laptops'>
+              <h5>{{laptop.rating}} ({{laptop.reviewCount}} reviews)</h5>
+            </td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.price}}</td>
+          </tr>
+          <tr>
+            <td>Brand</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.brand}}</td>
+          </tr>
+          <tr>
+            <td>Operating System</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.os}}</td>
+          </tr>
+          <tr>
+            <td>CPU</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.cpu}}</td>
+          </tr>
+          <tr>
+            <td>Screen</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.screen}}</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.memory}}</td>
+          </tr>
+          <tr>
+            <td>Storage</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.storage}}</td>
+          </tr>
+          <tr>
+            <td>Graphics Card</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.gpu}}</td>
+          </tr>
+          <tr>
+            <td>Video Memory</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.gpuMem}}</td>
+          </tr>
+          <tr>
+            <td>Weight</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.weight}}</td>
+          </tr>
+          <tr>
+            <td>Resolution</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.resolution}}</td>
+          </tr>
+          <tr>
+            <td>Touchscreen</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.touchscreen}}</td>
+          </tr>
+          <tr>
+            <td>Battery Life</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.battery}}</td>
+          </tr>
+          <tr>
+            <td>Style</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.hwStyle}}</td>
+          </tr>
+          <tr>
+            <td>Review</td>
+            <td ng-repeat='laptop in laptops'>
+              <a id=laptopMagReview href={{laptop.reviewLink()}}>Review</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <aside id="pers">
+      <section class="side-box">
+        <h2>Personal</h2>
+        <div id="scratchpad">
+          <p ondragover="" ondrop="">Think of this section as your personal scratch paper.
+            Type your own notes or drop text directly from the page to save
+            clippings for later anywhere. You can also drag laptop models here to
+            set them aside for comparison later.
+          </p>
+          <div class="sidebar-item-node" ng-repeat='laptop in laptops'>
+            <button type='button' class='close' ng-click=removeItem($index)>&times;</button>
+            <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">
+            <h4>{{laptop.laptopTitle()}}</h4>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</body>
+</html>
