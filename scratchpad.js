@@ -12,13 +12,15 @@ function loadSideItems() {
   var string = sessionStorage.getItem('personals')
   var parsedItems = $.parseJSON(string);
   if (parsedItems.length > 0) {
-    var laptopTitle = function() {
-      return this.brand + " " + this.series;
-    }
     for (item of parsedItems) {
-      item.laptopTitle = laptopTitle;
-      sidebarItems.add(item);
-      insertLaptop(item);
+      try {
+        restoreItem(item);
+        sidebarItems.add(item);
+        insertLaptop(item);
+      }
+      catch (e) {
+        console.log(e.stack);
+      }
     }
   }
 }

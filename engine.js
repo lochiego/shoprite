@@ -10,6 +10,20 @@ web-hosted version of bigsemantics
 
 var bsService = new BSAutoSwitch(['elkanacmmmdgbnhdjopfdeafchmhecbf', 'gdgmmfgjalcpnakohgcfflgccamjoipd ']);
 
+function onLoad() {
+	var string = sessionStorage.getItem("working_items");
+	var savedItems = $.parseJSON(string);
+	if (savedItems.length > 0) {
+		for (item of savedItems) {
+			restoreItem(item);
+			appendLaptop(item);
+		}
+	}
+	else {
+		onLoadSemantics('http://www.newegg.com/Laptops-Notebooks/SubCategory/ID-32?Pagesize=90');
+	}
+}
+
 /*
 Called on the data-only page
 */
@@ -44,13 +58,9 @@ function foundData(err, metadataAndMetametaData){
 	//never trust metadata! Like file I/O you should wrap it try catch statements
 	try{
 		// browseCont.appendChild(youtubeThumbnail); // Instead append each of the images
-		var listNode = document.getElementById("item-list");
 		for (item of unwrappedMetadata.items) {
-			createItem(item, listNode);
+			createItem(item);
 		}
-
-		var browseCont = document.getElementById('browse-content');
-		browseCont.appendChild(listNode);
 	}catch(e){
 		var textOutput = e.message;
 		var textNode = document.createTextNode(textOutput);
@@ -69,7 +79,7 @@ function randomIntFromInterval(min,max)
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-function createItem(item, parent) {
+function createItem(item) {
 	var location = item.location;
 
 	var options = {};
@@ -81,82 +91,95 @@ function createItem(item, parent) {
 
 		try {
 			var product = new laptop(itemDetails);
-			working_items.push(product);
-
-			var itemNode = document.createElement("li");
-			itemNode.className = "item-node";
-
-			var anchorNode = document.createElement("a");
-			att = document.createAttribute("data-toggle");
-			att.value = "modal";
-			anchorNode.setAttributeNode(att);
-			att = document.createAttribute("href");
-			att.value = "#laptopModal";
-			anchorNode.setAttributeNode(att);
-			var att = document.createAttribute("draggable");
-			att.value = true;
-			anchorNode.setAttributeNode(att);
-			att = document.createAttribute("ondragstart");
-			att.value = "dragItem(event)";
-			anchorNode.setAttributeNode(att);
-
-			var att = document.createAttribute("data-product-index");
-			att.value = working_items.length-1;
-			anchorNode.setAttributeNode(att);
-
-			var nameNode = document.createElement("h3");
-			var title = product.laptopTitle();
-			var itemName = document.createTextNode(title);
-			nameNode.appendChild(itemName);
-
-			var imageUrl = product.imageUrl;
-			var imageNode = document.createElement("img");
-			imageNode.src = imageUrl;
-			imageNode.alt = title;
-			att = document.createAttribute("draggable");
-			att.value = false;
-			imageNode.setAttributeNode(att);
-
-			anchorNode.appendChild(imageNode);
-			anchorNode.appendChild(nameNode);
-
-			// Add top features from filter or basic ones if not available
-			var featuresNode = document.createElement("ul");
-
-			if (filters.count > 0) {
-				// Price should always be shown
-				addFeatureText("$" + product.price, featuresNode);
-			} else {	// Use stock comparisons in lieu of user-specified ones
-				// price
-				addFeatureText("$" + product.price, featuresNode);
-
-				// Memory
-				var mem = product.memory;
-				if (mem != null) {
-					addFeatureText(mem, featuresNode);
-				}
-
-				// Storage
-				var storage = product.storage;
-				if (storage != null) {
-					addFeatureText(storage, featuresNode);
-				}
-
-				// Display size
-				var display = product.screen;
-				if (display != null) {
-					addFeatureText(display, featuresNode);
-				}
-			}
-
-			anchorNode.appendChild(featuresNode);
-			itemNode.appendChild(anchorNode);
-			parent.appendChild(itemNode);
+			appendLaptop(product);
+			sessionStorage.setItem('working_items', JSON.stringify([...working_items]));
 		}
 		catch(e){
 			console.log(e.stack);
 		}
 	});
+}
+
+function appendLaptop(product) {
+	working_items.push(product);
+
+	var itemNode = document.createElement("li");
+	itemNode.className = "item-node";
+
+	var anchorNode = document.createElement("a");
+	att = document.createAttribute("data-toggle");
+	att.value = "modal";
+	anchorNode.setAttributeNode(att);
+	att = document.createAttribute("href");
+	att.value = "#laptopModal";
+	anchorNode.setAttributeNode(att);
+	var att = document.createAttribute("draggable");
+	att.value = true;
+	anchorNode.setAttributeNode(att);
+	att = document.createAttribute("ondragstart");
+	att.value = "dragItem(event)";
+	anchorNode.setAttributeNode(att);
+
+	var att = document.createAttribute("data-product-index");
+	att.value = working_items.length-1;
+	anchorNode.setAttributeNode(att);
+
+	var nameNode = document.createElement("h3");
+	var title = product.laptopTitle();
+	var itemName = document.createTextNode(title);
+	nameNode.appendChild(itemName);
+
+	var imageUrl = product.imageUrl;
+	var imageNode = document.createElement("img");
+	imageNode.src = imageUrl;
+	imageNode.alt = title;
+	att = document.createAttribute("draggable");
+	att.value = false;
+	imageNode.setAttributeNode(att);
+
+	anchorNode.appendChild(imageNode);
+	anchorNode.appendChild(nameNode);
+
+	// Add top features from filter or basic ones if not available
+	var featuresNode = document.createElement("ul");
+
+	if (filters.count > 0) {
+		// Price should always be shown
+		addFeatureText("$" + product.price, featuresNode);
+	} else {	// Use stock comparisons in lieu of user-specified ones
+		// price
+		addFeatureText("$" + product.price, featuresNode);
+
+		// Memory
+		var mem = product.memory;
+		if (mem != null) {
+			addFeatureText(mem, featuresNode);
+		}
+
+		// Storage
+		var storage = product.storage;
+		if (storage != null) {
+			addFeatureText(storage, featuresNode);
+		}
+
+		// Display size
+		var display = product.screen;
+		if (display != null) {
+			addFeatureText(display, featuresNode);
+		}
+	}
+
+	anchorNode.appendChild(featuresNode);
+	itemNode.appendChild(anchorNode);
+
+	var parent = document.getElementById("item-list");
+	parent.appendChild(itemNode);
+}
+
+function restoreItem(item) {
+	item.laptopTitle = function() {
+		return this.brand + " " + this.series;
+	};
 }
 
 function laptop(item) {
