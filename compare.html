@@ -54,6 +54,83 @@
         <h2>Specifications</h2>
         <p>Toggle the specifications for the table.
         </p>
+        <div id="filters" class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showPrice'> Price</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showBrand'> Brand</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showOS'> Operating System</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showCPU'> CPU</label>
+          </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showScreen'> Screen Size</label>
+          </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showMemory'> Memory</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showStorage'> Storage</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showGPU'> Graphics Card</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showGPUMem'> Video Memory</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showWeight'> Weight</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showResolution'> Resolution</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showTouchscreen'> Touchscreen</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showBattery'> Battery</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showStyle'> Style</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showReview'> LaptopMag Review</label>
+            </div>
+          </div>
+        </div>
         <!-- Put filter options -->
       </section>
     </aside>
@@ -78,63 +155,63 @@
               <h5>{{laptop.rating}} ({{laptop.reviewCount}} reviews)</h5>
             </td>
           </tr>
-          <tr>
+          <tr ng-show="showPrice">
             <td>Price</td>
             <td ng-repeat='laptop in laptops'>{{laptop.price}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showBrand">
             <td>Brand</td>
             <td ng-repeat='laptop in laptops'>{{laptop.brand}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showOS">
             <td>Operating System</td>
             <td ng-repeat='laptop in laptops'>{{laptop.os}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showCPU">
             <td>CPU</td>
             <td ng-repeat='laptop in laptops'>{{laptop.cpu}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showScreen">
             <td>Screen</td>
             <td ng-repeat='laptop in laptops'>{{laptop.screen}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showMemory">
             <td>Memory</td>
             <td ng-repeat='laptop in laptops'>{{laptop.memory}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showStorage">
             <td>Storage</td>
             <td ng-repeat='laptop in laptops'>{{laptop.storage}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showGPU">
             <td>Graphics Card</td>
             <td ng-repeat='laptop in laptops'>{{laptop.gpu}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showGPUMem">
             <td>Video Memory</td>
             <td ng-repeat='laptop in laptops'>{{laptop.gpuMem}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showWeight">
             <td>Weight</td>
             <td ng-repeat='laptop in laptops'>{{laptop.weight}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showResolution">
             <td>Resolution</td>
             <td ng-repeat='laptop in laptops'>{{laptop.resolution}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showTouchscreen">
             <td>Touchscreen</td>
             <td ng-repeat='laptop in laptops'>{{laptop.touchscreen}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showBattery">
             <td>Battery Life</td>
             <td ng-repeat='laptop in laptops'>{{laptop.battery}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showStyle">
             <td>Style</td>
             <td ng-repeat='laptop in laptops'>{{laptop.hwStyle}}</td>
           </tr>
-          <tr>
+          <tr ng-show="showReview">
             <td>Review</td>
             <td ng-repeat='laptop in laptops'>
               <a target="_blank" id=laptopMagReview ng-href="{{laptop.reviewLink()}}">Review</a>
