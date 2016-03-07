@@ -64,8 +64,14 @@
             <td></td>
             <td ng-repeat='laptop in laptops'>
                 <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">
+                {{laptop.brand + " " + laptop.model}}
             </td>
           </tr>
+          <!-- <tr>
+            <td>Model</td>
+            <td ng-repeat='laptop in laptops'>
+            </td>
+          </tr> -->
           <tr>
             <td>Newegg Rating</td>
             <td ng-repeat='laptop in laptops'>
@@ -131,7 +137,7 @@
           <tr>
             <td>Review</td>
             <td ng-repeat='laptop in laptops'>
-              <a id=laptopMagReview href={{laptop.reviewLink()}}>Review</a>
+              <a target="_blank" id=laptopMagReview ng-href="{{laptop.reviewLink()}}">Review</a>
             </td>
           </tr>
         </tbody>
