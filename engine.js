@@ -14,6 +14,8 @@ function onLoad() {
 	var string = sessionStorage.getItem("working_items");
 	var savedItems = $.parseJSON(string);
 	if (savedItems.length > 0) {
+		$('.loadingGifOfDoom').remove();
+
 		for (item of savedItems) {
 			restoreItem(item);
 			appendLaptop(item);
@@ -290,7 +292,7 @@ function constructFilter(name,options) {
 		"<ul class='list-group'>"];
 
 		for (option of options) {
-			string.push("<li class='list-group-item'>" + option + "</li>");
+			string.push("<li class='list-group-item'><label><input type='checkbox' name='"+option+"'> " + option + "</label></li>");
 		}
 		string.push("</ul></div></div></div>");
 		return string.join("");
