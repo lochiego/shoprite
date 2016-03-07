@@ -186,8 +186,8 @@
             modal.find('.modal-title').text(title);
             modal.find('img').attr({'src':item.imageUrl,'alt':item.laptopTitle()});
             var ratingString;
-            if (item.hasOwnProperty("rating")) {
-              ratingString = item.rating+" out of 5 (" + item.reviewCount+" reviews)";
+            if (!isNaN(Number(item.rating))) {
+              ratingString = item.rating+"/5 (" + item.reviewCount+" reviews)";
             }
             else {
               ratingString = "Not Rated";

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link href="./style.css" type="text/css" rel="stylesheet">
+  <link href="./shopping.css" type="text/css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <title>ShopRite - Compare</title>
+
+  <!-- non BigSemantics include statements -->
+
+  <!-- bsjsCore Files. You must include them in this order so as to use any BigSemantics porject -->
+  <!-- Readyable is a class used to handle the asynchronous load time of the BS project
+  BSAutoSwitch is an interface to BigSemantics that can switch between using the lab's hosted service for metadata
+  and using a browser-installed extension. BSService and BSSExtension are implementations -->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/Readyable.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSAutoSwitch.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSService.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSExtension.js"></script>
+  <!-- BSUtils, Downloader, ParsedURL, and simplBase are helper classes. Include them, but don't really worry about them-->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/BSUtils.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/ParsedURL.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/Downloader.js"></script>
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/simpl/simplBase.js"></script>
+  <!--
+  RepoMan loads a Meta-metadata repository. Avoid doing anything with it directly; it's messy-->
+  <script type="text/javascript" src="../BigSemanticsJavaScript/bsjsCore/RepoMan.js"></script>
+
+  <!--Webpage-specific javascript and CSS includes-->
+  <script type="text/javascript" src="./engine.js"></script>
+  <script type="text/javascript" src="./comparisons.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom=0">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html"><img id="logo" src="res/logo.png" alt="ShopRite"></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="learn.html">Learning</a></li>
+        <li><a href="freestyle.html">Shop</a></li>
+        <li class="active"><a href="compare.html">Compare</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id="content" ng-app="shopRite" ng-controller="comparisons">
+    <aside id="nav">
+      <section class="side-box">
+        <h2>Specifications</h2>
+        <p>Toggle the specifications for the table.
+        </p>
+        <div id="filters" class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showPrice'> Price</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showBrand'> Brand</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showOS'> Operating System</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showCPU'> CPU</label>
+          </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showScreen'> Screen Size</label>
+          </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showMemory'> Memory</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showStorage'> Storage</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showGPU'> Graphics Card</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showGPUMem'> Video Memory</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showWeight'> Weight</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showResolution'> Resolution</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showTouchscreen'> Touchscreen</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showBattery'> Battery</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showStyle'> Style</label>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label class="panel-title"><input type='checkbox' ng-model='showReview'> LaptopMag Review</label>
+            </div>
+          </div>
+        </div>
+        <!-- Put filter options -->
+      </section>
+    </aside>
+    <main>
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td></td>
+            <td ng-repeat='laptop in laptops'>
+                <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">
+                {{laptop.brand + " " + laptop.model}}
+            </td>
+          </tr>
+          <!-- <tr>
+            <td>Model</td>
+            <td ng-repeat='laptop in laptops'>
+            </td>
+          </tr> -->
+          <tr>
+            <td>Newegg Rating</td>
+            <td ng-repeat='laptop in laptops'>
+              <h5>{{laptop.rating}} ({{laptop.reviewCount}} reviews)</h5>
+            </td>
+          </tr>
+          <tr ng-show="showPrice">
+            <td>Price</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.price}}</td>
+          </tr>
+          <tr ng-show="showBrand">
+            <td>Brand</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.brand}}</td>
+          </tr>
+          <tr ng-show="showOS">
+            <td>Operating System</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.os}}</td>
+          </tr>
+          <tr ng-show="showCPU">
+            <td>CPU</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.cpu}}</td>
+          </tr>
+          <tr ng-show="showScreen">
+            <td>Screen</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.screen}}</td>
+          </tr>
+          <tr ng-show="showMemory">
+            <td>Memory</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.memory}}</td>
+          </tr>
+          <tr ng-show="showStorage">
+            <td>Storage</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.storage}}</td>
+          </tr>
+          <tr ng-show="showGPU">
+            <td>Graphics Card</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.gpu}}</td>
+          </tr>
+          <tr ng-show="showGPUMem">
+            <td>Video Memory</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.gpuMem}}</td>
+          </tr>
+          <tr ng-show="showWeight">
+            <td>Weight</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.weight}}</td>
+          </tr>
+          <tr ng-show="showResolution">
+            <td>Resolution</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.resolution}}</td>
+          </tr>
+          <tr ng-show="showTouchscreen">
+            <td>Touchscreen</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.touchscreen}}</td>
+          </tr>
+          <tr ng-show="showBattery">
+            <td>Battery Life</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.battery}}</td>
+          </tr>
+          <tr ng-show="showStyle">
+            <td>Style</td>
+            <td ng-repeat='laptop in laptops'>{{laptop.hwStyle}}</td>
+          </tr>
+          <tr ng-show="showReview">
+            <td>Review</td>
+            <td ng-repeat='laptop in laptops'>
+              <a target="_blank" id=laptopMagReview ng-href="{{laptop.reviewLink()}}">Review</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <aside id="pers">
+      <section class="side-box">
+        <h2>Personal</h2>
+        <div id="scratchpad">
+          <p ondragover="" ondrop="">Think of this section as your personal scratch paper.
+            Type your own notes or drop text directly from the page to save
+            clippings for later anywhere. You can also drag laptop models here to
+            set them aside for comparison later.
+          </p>
+          <div class="sidebar-item-node" ng-repeat='laptop in laptops'>
+            <button type='button' class='close' ng-click=removeItem($index)>&times;</button>
+            <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">
+            <h4>{{laptop.laptopTitle()}}</h4>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</body>
+</html>

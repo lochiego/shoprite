@@ -11,7 +11,7 @@ var sidebarItems = new Set();
 function loadSideItems() {
   var string = sessionStorage.getItem('personals')
   var parsedItems = $.parseJSON(string);
-  if (parsedItems.length > 0) {
+  if (parsedItems != null && parsedItems.length > 0) {
     for (item of parsedItems) {
       try {
         restoreItem(item);

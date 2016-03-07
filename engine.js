@@ -13,7 +13,7 @@ var bsService = new BSAutoSwitch(['elkanacmmmdgbnhdjopfdeafchmhecbf', 'gdgmmfgja
 function onLoad() {
 	var string = sessionStorage.getItem("working_items");
 	var savedItems = $.parseJSON(string);
-	if (savedItems.length > 0) {
+	if (savedItems != null && savedItems.length > 0) {
 		$('.loadingGifOfDoom').remove();
 
 		for (item of savedItems) {
@@ -180,8 +180,23 @@ function appendLaptop(product) {
 
 function restoreItem(item) {
 	item.laptopTitle = function() {
-		return this.brand + " " + this.series;
+		var title = this.brand;
+		if (this.series != null) {
+			title += " " + this.series;
+		}
+		else {
+			title += " " + this.model;
+		}
+		return title;
 	};
+	item.reviewLink = function() {
+		var queryString = this.brand
+		if (this.series != null) {
+			queryString += this.series.replace(" ", "+");
+		}
+		var fullUrl="http://www.laptopmag.com/search?q="+queryString;
+		return fullUrl;
+	}
 }
 
 function laptop(item) {
@@ -194,6 +209,7 @@ function laptop(item) {
  	this.imageUrl = item.main_images[0].location;
 	this.brand = findFeature("Brand", specTable);
 	this.series = findFeature("Series", specTable);
+	this.model = findFeature("Model", specTable);
 	this.os = findFeature("Operating System", specTable);
 	this.cpu = findFeature("CPU Type", specTable);
 	this.screen = findFeature("Screen", specTable);
@@ -206,7 +222,7 @@ function laptop(item) {
 	this.touchscreen = findFeature("Touchscreen", specTable);
 	this.battery = findFeature("Battery Life", specTable);
 	this.hwStyle = findFeature("Style", specTable);
-	if (item.hasOwnProperty(reviews)) {
+	if (item.hasOwnProperty("reviews")) {
 		var reviews = item.reviews;
 		var rating = 0;
 		for (review of reviews) {
@@ -217,6 +233,18 @@ function laptop(item) {
 		}
 		this.rating = Math.round( rating * 10 ) / 10;
 		this.reviewCount = reviews.length;
+	}
+	else {
+		this.rating = "Not rated";
+		this.reviewCount = 0;
+	}
+	this.reviewLink = function() {
+		var queryString = this.brand
+		if (this.series != null) {
+			queryString += this.series.replace(" ", "+");
+		}
+		var fullUrl="http://www.laptopmag.com/search?q="+queryString;
+		return fullUrl;
 	}
 }
 
