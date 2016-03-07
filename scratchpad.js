@@ -49,18 +49,19 @@ function insertLaptop(laptop) {
   document.getElementById('scratchpad').appendChild(sidebarVersion(laptop));
 }
 
-function sidebarVersion(laptop) {
-  var div = document.createElement("div");
-  div.className = "sidebar-item-node";
-  div.laptop = laptop;
-  div.innerHTML = "<button type='button' class='close' onclick=removeItem(event)>&times;</button><img src="+laptop.imageUrl+" alt="+laptop.laptopTitle()+"><h4>"+laptop.laptopTitle()+"</h4>"
-
-  return div;
-}
-
 function removeItem(event) {
   var div = event.target.parentNode;
   var item = div.laptop;
   removeSideItem(item);
   document.getElementById('scratchpad').removeChild(div);
+}
+
+function sidebarVersion(laptop) {
+  var div = document.createElement("div");
+  div.className = "sidebar-item-node";
+  div.laptop = laptop;
+  var index = sidebarItems.size-1;
+  div.innerHTML = "<button type='button' class='close' onclick=removeItem(event)>&times;</button><a href='#laptopModal' data-toggle='modal' data-product-index="+index+" data-source='sidebar'><img src="+laptop.imageUrl+" alt="+laptop.laptopTitle()+"><h4>"+laptop.laptopTitle()+"</h4></a>"
+
+  return div;
 }

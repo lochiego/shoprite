@@ -173,8 +173,12 @@
         <script>
         $('#laptopModal').on('show.bs.modal', function (event) { // id of the modal with event
             var itemIndex = $(event.relatedTarget).data('product-index'); // Item that triggered the modal
-            var item = working_items[itemIndex];
-
+            var item;
+            if ($(event.relatedTarget).data('source') == null) {
+              item = working_items[itemIndex];
+            } else {
+              item = Array.from(sidebarItems)[itemIndex];
+            }
             var title = item.laptopTitle();
 
             // Update the modal's spec content.
