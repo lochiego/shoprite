@@ -1,3 +1,4 @@
+// Following functions support dropping in laptop products.
 function dragItem(event) {
   event.dataTransfer.setData("item-index",event.target.getAttribute('data-product-index'));
 }
@@ -6,6 +7,7 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
+// Global variable maintains working set of sidebar items.
 var sidebarItems = new Set();
 
 function loadSideItems() {
@@ -14,7 +16,7 @@ function loadSideItems() {
   if (parsedItems != null && parsedItems.length > 0) {
     for (item of parsedItems) {
       try {
-        restoreItem(item);
+        restoreItem(item);  // Necessary since functions don't get JSON-ified.
         sidebarItems.add(item);
         insertLaptop(item);
       }
@@ -25,6 +27,9 @@ function loadSideItems() {
   }
 }
 
+/*
+Need to maintain the session storage for comparisons at any time.
+*/
 function addSideItem(laptop) {
   sidebarItems.add(laptop);
   sessionStorage.setItem('personals', JSON.stringify([...sidebarItems]));
@@ -35,6 +40,7 @@ function removeSideItem(laptop) {
   sessionStorage.setItem('personals', JSON.stringify([...sidebarItems]));
 }
 
+// Processes actual drop action to ingest product for comparison.
 function dropItem(ev) {
   ev.preventDefault();
   var itemIndex = ev.dataTransfer.getData("item-index");
@@ -45,6 +51,7 @@ function dropItem(ev) {
   }
 }
 
+// Injects the laptop information into the scratchpad DOM.
 function insertLaptop(laptop) {
   document.getElementById('scratchpad').appendChild(sidebarVersion(laptop));
 }
@@ -56,6 +63,7 @@ function removeItem(event) {
   document.getElementById('scratchpad').removeChild(div);
 }
 
+// Translates the laptop object into HTML used in the sidebar.
 function sidebarVersion(laptop) {
   var div = document.createElement("div");
   div.className = "sidebar-item-node";

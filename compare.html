@@ -52,8 +52,9 @@
     <aside id="nav">
       <section class="side-box">
         <h2>Specifications</h2>
-        <p>Toggle the specifications for the table.
+        <p>Toggle the specs to <b>show</b> them in the table.
         </p>
+        <!-- AngularJS models toggle visibility of specifications -->
         <div id="filters" class="panel-group">
           <div class="panel panel-default">
             <div class="panel-body">
@@ -131,24 +132,21 @@
             </div>
           </div>
         </div>
-        <!-- Put filter options -->
       </section>
     </aside>
     <main>
+      <!-- Comparison Table -->
       <table class="table table-striped">
         <tbody>
           <tr>
+            <!-- Each laptop is separate column -->
             <td></td>
             <td ng-repeat='laptop in laptops'>
+              <button type='button' class='close' ng-click=removeItem($index)>&times;</button>
                 <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">
                 {{laptop.brand + " " + laptop.model}}
             </td>
           </tr>
-          <!-- <tr>
-            <td>Model</td>
-            <td ng-repeat='laptop in laptops'>
-            </td>
-          </tr> -->
           <tr>
             <td>Newegg Rating</td>
             <td ng-repeat='laptop in laptops'>
@@ -224,11 +222,7 @@
       <section class="side-box">
         <h2>Personal</h2>
         <div id="scratchpad">
-          <p ondragover="" ondrop="">Think of this section as your personal scratch paper.
-            Type your own notes or drop text directly from the page to save
-            clippings for later anywhere. You can also drag laptop models here to
-            set them aside for comparison later.
-          </p>
+          <p>Use this panel to <b>remove</b> items from your comparison chart.</p>
           <div class="sidebar-item-node" ng-repeat='laptop in laptops'>
             <button type='button' class='close' ng-click=removeItem($index)>&times;</button>
             <img ng-src="{{laptop.imageUrl}}" alt="{{laptop.laptopTitle()}}">

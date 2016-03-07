@@ -74,6 +74,7 @@
       </div>
     </main>
     <aside id="pers">
+      <!-- Allow drag and drop to the personal section -->
       <section class="side-box" ondragover="allowDrop(event)" ondrop="dropItem(event)">
         <h2 ondragover="" ondrop="">Personal</h2>
         <div id="scratchpad">
@@ -88,7 +89,7 @@
     </aside>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal appears on item selection -->
   <div id="laptopModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -171,6 +172,7 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         <script>
+        // When modal appears use the item selected to populate dialog.
         $('#laptopModal').on('show.bs.modal', function (event) { // id of the modal with event
             var itemIndex = $(event.relatedTarget).data('product-index'); // Item that triggered the modal
             var item;

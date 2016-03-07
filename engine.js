@@ -42,13 +42,6 @@ function onLoadSemantics(url){
 	bsService.loadMetadata(url, options, callback);
 }
 
-// Ignore this. I just use it to make numbers slightly prettier -- visciously copy-pasted from stack overflow:
-// http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
-
-function numberWithCommas(x) {
-	return x.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 //The first argument passed to callback is an error message. in this case its null <3
 function foundData(err, metadataAndMetametaData){
 
@@ -81,6 +74,10 @@ function randomIntFromInterval(min,max)
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 
+/*
+Called to retrieve the metadata for a particular item, process it into
+a product instance and add it to the view.
+*/
 function createItem(item) {
 	var location = item.location;
 
@@ -93,8 +90,8 @@ function createItem(item) {
 
 		try {
 			var product = new laptop(itemDetails);
-			appendLaptop(product);
-			sessionStorage.setItem('working_items', JSON.stringify([...working_items]));
+			appendLaptop(product);	// Adds product to view
+			sessionStorage.setItem('working_items', JSON.stringify([...working_items])); // Store for the session so we don't lose it as user changes pages
 		}
 		catch(e){
 			console.log(e.stack);
@@ -102,6 +99,10 @@ function createItem(item) {
 	});
 }
 
+/*
+Generates an element holding the representation of the accessioned product
+and injects it into the DOM.
+*/
 function appendLaptop(product) {
 	working_items.push(product);
 
@@ -145,7 +146,7 @@ function appendLaptop(product) {
 	// Add top features from filter or basic ones if not available
 	var featuresNode = document.createElement("ul");
 
-	if (filters.count > 0) {
+	if (filters.count > 0) { // TODO Someday maybe make this filter set work
 		// Price should always be shown
 		addFeatureText("$" + product.price, featuresNode);
 	} else {	// Use stock comparisons in lieu of user-specified ones
@@ -178,6 +179,9 @@ function appendLaptop(product) {
 	parent.appendChild(itemNode);
 }
 
+/*
+Necessary since JSON doesn't capture functions, need to re-introduce them.
+*/
 function restoreItem(item) {
 	item.laptopTitle = function() {
 		var title = this.brand;
@@ -199,6 +203,11 @@ function restoreItem(item) {
 	}
 }
 
+/*
+Constructor for a new laptop instance, from where we extract the features
+so that we can discard bulky metadata nad persist lighter object with more
+accessible properties.
+*/
 function laptop(item) {
 	var specTable = item.specifications_table;
 	var modelTable = specTable[0];
@@ -222,7 +231,7 @@ function laptop(item) {
 	this.touchscreen = findFeature("Touchscreen", specTable);
 	this.battery = findFeature("Battery Life", specTable);
 	this.hwStyle = findFeature("Style", specTable);
-	if (item.hasOwnProperty("reviews")) {
+	if (item.hasOwnProperty("reviews")) {	// Not all products have reviews
 		var reviews = item.reviews;
 		var rating = 0;
 		for (review of reviews) {
@@ -238,6 +247,10 @@ function laptop(item) {
 		this.rating = "Not rated";
 		this.reviewCount = 0;
 	}
+	/* Unfortunately this is the best way to link to a review, as sites
+	 considered don't support cross-domain linking. Had intended to provide
+	 an iframe to view the results of the query but that doesn't work.
+	 */
 	this.reviewLink = function() {
 		var queryString = this.brand
 		if (this.series != null) {
@@ -248,6 +261,7 @@ function laptop(item) {
 	}
 }
 
+// Used to help speed up feature identification and creation
 var specTitles = [
 	"Brand",
 	"Series",
@@ -279,6 +293,7 @@ function findFeature(feature, spec_table) {
 	return null;
 }
 
+// Adds the feature to the filter list on the nav element.
 function addFeatureText(text, parent) {
 	var listNode = document.createElement("li");
 	var textNode = document.createTextNode(text);
@@ -286,11 +301,11 @@ function addFeatureText(text, parent) {
 	parent.appendChild(listNode);
 }
 
-
+// Calls each individual filter constructor.
 function constructFilters() {
 	var element = document.getElementById("filters");
 
-	var htmlChunks =[];
+	var htmlChunks =[]; // Using array due to rumor at horrendous string processing times for javascript
 	htmlChunks.push(constructPriceFilter());
 	htmlChunks.push(constructBrandFilter());
 	htmlChunks.push(constructOSFilter());
@@ -331,6 +346,9 @@ function constructFilter(name,options) {
 	return "";
 }
 
+/**
+Didn't have a chance to make these dynamic or more suitable for real users... or even functional. Hardcoded eye candy for now.
+*/
 function constructPriceFilter() {
 	return constructFilter("Price", ["$100 - $200", "$200 - $400", "$400 - $600", "$600 - $800"]);
 }

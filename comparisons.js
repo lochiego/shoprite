@@ -4,9 +4,10 @@ app.controller('comparisons', function($scope) {
 
   $scope.laptops = [];
 
+  // Initialize laptop container
   var string = sessionStorage.getItem('personals')
   var parsedItems = $.parseJSON(string);
-  if (parsedItems.length > 0) {
+  if (parsedItems != null && parsedItems.length > 0) {
     for (item of parsedItems) {
       try {
         restoreItem(item);
@@ -20,7 +21,7 @@ app.controller('comparisons', function($scope) {
 
   $scope.removeItem = function(index) {
     var item = $scope.laptops[index];
-    $scope.laptops.splice(index,1);
+    $scope.laptops.splice(index,1); // Removes from array, angular responds in view
     sessionStorage.setItem('personals', JSON.stringify($scope.laptops));
 }
 });
